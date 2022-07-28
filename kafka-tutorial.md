@@ -64,10 +64,12 @@
 <br>
 
 ## 주키퍼, 카프카 브로커 실행 전 환경 설정
-
+**EC2 서버 1대에 주키퍼, 카프카 1개 설치**
+<br>
+<br>
 - 카프카 바이너리 패키지 다운로드
 
-[Apache Kafka](https://kafka.apache.org/downloads)
+    [Apache Kafka](https://kafka.apache.org/downloads)
 
     ```java
     // kafka_2.12 압축파일 다운로드
