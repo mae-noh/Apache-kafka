@@ -216,8 +216,13 @@ bin/kafka-topics.sh --bootstrap-server (퍼블릭IP):9092 --list
 
 ### 3. Topic 삭제
 
+- config/server_properties 변경
+```
+delete.topic.enable = true
+```
+- 카프카 재기동
 ```java
-./bin/kafka-topics.sh --delete --zookeeper (퍼블릭IP):2181 --topic (토픽명)
+bin/kafka-topics.sh --delete --zookeeper (퍼블릭IP):2181 --topic (토픽명)
 ```
 
 ### 4. Topic 내에 Event 생성
