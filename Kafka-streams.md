@@ -1,12 +1,19 @@
 # Kafka Streams
-- Streams Developer Guide를 참고하여 정리한 문서입니다.
+- Streams Developer Guide를 참고하여 정리한 문서입니다.<br>
 https://docs.confluent.io/platform/current/streams/developer-guide/index.html
+
+<br>
 
 ## 목차
 - Kafka Streams API
 - Q&A
 
 <br>
+<br>
+
+# Kafka Streams API
+카프카 스트림즈가 무엇인가요? 아직 잘 모르겠습니다.
+
 <br>
 
 ## 토폴로지
