@@ -94,10 +94,10 @@ SIGTERM 정상 종료를 위해 추가하는 것이 권장됨.
     - [application.id](http://application.id) : 카프카 클러스터 내 식별자
     - bootstrap.servers : 카프카 서버
 
-   ```java
-   Properties props = new Properties();
-   props.put(StreamsConfig.APPLICATION_ID_CONFIG, "searchlog-streams-application");props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "host:port");
-   ```
+      ```java
+      Properties props = new Properties();
+      props.put(StreamsConfig.APPLICATION_ID_CONFIG, "searchlog-streams-application");props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "host:port");
+      ```
 
 ## Stream DSL
 
