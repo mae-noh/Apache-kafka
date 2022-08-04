@@ -1,3 +1,7 @@
+# Kafka Streams
+- Streams Developer Guide를 참고하여 정리한 문서입니다.
+https://docs.confluent.io/platform/current/streams/developer-guide/index.html
+
 ## 목차
 - Kafka Streams API
 - Q&A
@@ -5,9 +9,7 @@
 <br>
 <br>
 
-
-## Kafka Streams API
-
+## 토폴로지
 - 카프카 스트림 API를 사용하여 `프로세서 토폴로지`를 작성할 수 있음.
 <img src="https://user-images.githubusercontent.com/65100355/182748739-e806edf2-5504-472f-9ea8-8877c3b7e86c.png" width="20%" height="30%">
 
@@ -190,21 +192,9 @@ ex) filter, map은 다른 KStream을 생성한다.
 
    `aggregationing`,`joining`,`windowing`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<br><br><br><br><br><br>
+# Q&A
 ### 카프카 스트림은 어떻게 띄우는 것인가요?
 Kafka Streams 라이브러리를 사용하는 모든 Java 애플리케이션은 Kafka Streams 애플리케이션으로 간주됩니다.
 
-### 카프카 스트림이 기존 Consumer, Producer와 다른점이 무엇인가?
+### 카프카 스트림이 기존 Consumer, Producer와 다른점이 무엇인가요?
