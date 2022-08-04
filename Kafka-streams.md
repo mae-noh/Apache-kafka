@@ -98,12 +98,15 @@ SIGTERM 정상 종료를 위해 추가하는 것이 권장됨.
       Properties props = new Properties();
       props.put(StreamsConfig.APPLICATION_ID_CONFIG, "searchlog-streams-application");props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, "host:port");
       ```
+<br>
 
 ## Stream DSL
 
 Stream Processor API 위에 DSL 구축
 
 데이터 처리 작업을 간단하게 DSL(Domain Specific Language) 코드로 표현
+
+<br>
 
 ## ****Creating source streams from Kafka****
 
@@ -150,6 +153,7 @@ Topic 데이터를 레코드 스트림으로 저장
          .withValueSerde(Serdes.Long()) /* value serde */
        );
    ```
+<br>
 
 ## ****Transform a stream****
 
@@ -158,6 +162,8 @@ KStream 변환은 하나 이상의 KStream 개체 생성이 가능하다.
 ex) filter, map은 다른 KStream을 생성한다.
       split은 여러개 KStream을 생성할 수 있다
 
+<br>
+
 ## **Stateless transformations**
 
 상태 비저장 변환
@@ -165,6 +171,8 @@ ex) filter, map은 다른 KStream을 생성한다.
 - 처리를 위해 `상태`를 필요로하지 않음
 - 스트림 프로세서와 연결된 `상태저장소`가 필요 없음
 - `map`, `filter`
+
+<br>
 
 ## Stateful transformations
 
