@@ -5,10 +5,14 @@
 <br>
 
 ### 목차
-- 
+- Kafka 패키지 다운로드
+- Zookeeper 설정
+- Zookeeper 실행
+- Kafka 설정
+- Kafka 실행
 <br>
-<br>
-## Kafka 설치
+
+## Kafka 패키지 다운로드
 Kafka 설치시, Zookeeper 내장되어 있음
 
 ```
@@ -18,45 +22,52 @@ tar -xvf kafka_2.12-3.2.0.tgz
 ```
 
 ## Zookeeper 설정
-Zookeeper 3개를 하나의 클러스터로 구성<br>
+Zookeeper 3개의 노드를 하나의 클러스터로 구성<br>
 
 - Apache Kafka 폴더 config 내에 zookeper.properties 파일을 3개 복사한다.
-```
-cp zookeeper.properties zookeeper_1.properties
-cp zookeeper.properties zookeeper_2.properties
-cp zookeeper.properties zookeeper_3.properties
-```
+  ```
+  cp zookeeper.properties zookeeper_1.properties
+  cp zookeeper.properties zookeeper_2.properties
+  cp zookeeper.properties zookeeper_3.properties
+  ```
 
-- Zookeeper Log 저장 공간 폴더 생성<br>
-Apache Kafka 폴더 내에 data 폴더 생성<br>
+- Zookeeper Log 저장하는 폴더를 노드별로 생성한다.<br>
 (zookeeper_1,2,3 각각 저장 폴더 별도 구성)
-```
-./kafka_2.12-3.2.0/data
+  ```
+  cd /kafka_2.12-3.2.0
+  mkdir data
+  cd data
+  mkdir zookeeper_1
 
-./kafka_2.12-3.2.0/data/zookeeper_1
-./kafka_2.12-3.2.0/data/zookeeper_2
-./kafka_2.12-3.2.0/data/zookeeper_3
-```
+  ./kafka_2.12-3.2.0/data/zookeeper_1
+  ./kafka_2.12-3.2.0/data/zookeeper_2
+  ./kafka_2.12-3.2.0/data/zookeeper_3
+  ```
 
 - zookeeper_1.properties 설정
+zookeeper_2, zookeeper_3도 마찬가지로 설정한다.<br>
+(*) 표시의 경우 노드별로 다르게 설정한다.
 
-```
-dataDir=/kafka_2.12-3.2.0/data/zookeeper_1 // 각각 폴더 경로 입력 (zookeeper_1,zookeeper_2,zookeeper_3)
+  ```
+  cd config/zookeeper.properties // 이동
+  vi config/zookeeper.properties
+  
+  dataDir=/kafka_2.12-3.2.0/data/zookeeper_1 // (*) 각각 폴더 경로 설정 (zookeeper_1,zookeeper_2,zookeeper_3)
 
-clientPort=2181 // 각각 입력 (2181, 2182, 2183)
+  clientPort=2181 // (*) 각각 다른 포트 설정 (2181, 2182, 2183)
 
-maxClientCnxns=0 
+  maxClientCnxns=0 
 
-admin.enableServer=false
+  admin.enableServer=false
 
-tickTime=2000
-initLimit=30
-syncLimit=2
+  tickTime=2000
+  initLimit=30
+  syncLimit=2
 
-server.1=<IP>:28881:38881 // 서버 정보, 서버 1대이므로 IP는 통일
-server.2=<IP>:28882:38882
-server.3=<IP>:28883:38883
-```
+  server.1=<IP>:28881:38881 // 서버 정보, 서버 1대이므로 IP는 통일
+  server.2=<IP>:28882:38882 // (*) 각각 다른 포트 설정
+  server.3=<IP>:28883:38883
+  ```
 
 - dataDir
   로그가 쌓이는 경로<br>
@@ -83,25 +94,62 @@ server.3=<IP>:28883:38883
 <br>
   
 - server myid 설정
-```
-./kafka_2.12-3.2.0/data
+  ```
+  ./kafka_2.12-3.2.0/data
 
-cd ./kafka_2.12-3.2.0/data/zookeeper_1
-touch myid
+  cd ./kafka_2.12-3.2.0/data/zookeeper_1
+  touch myid
 
-// 1,2,3번 모두 적용
-./kafka_2.12-3.2.0/data/zookeeper_1/myid
-./kafka_2.12-3.2.0/data/zookeeper_2/myid
-./kafka_2.12-3.2.0/data/zookeeper_3/myid
+  // 1,2,3번 모두 적용
+  ./kafka_2.12-3.2.0/data/zookeeper_1/myid
+  ./kafka_2.12-3.2.0/data/zookeeper_2/myid
+  ./kafka_2.12-3.2.0/data/zookeeper_3/myid
 
-// myid 내에 zookeeper.properties에 설정한 (myid) 입력
-```
+  // myid 내에 zookeeper.properties에 설정한 (myid) 입력
+  ```
 
 ## Zookeeper 실행  
-```
-bin/zookeeper-server-start.sh -daemon ./config/zookeeper_1.properties
-bin/zookeeper-server-start.sh -daemon ./config/zookeeper_2.properties
-bin/zookeeper-server-start.sh -daemon ./config/zookeeper_3.properties
+  ```
+  bin/zookeeper-server-start.sh -daemon ./config/zookeeper_1.properties
+  bin/zookeeper-server-start.sh -daemon ./config/zookeeper_2.properties
+  bin/zookeeper-server-start.sh -daemon ./config/zookeeper_3.properties
+
+  // 실행 확인
+  ps -ef | grep zookeeper
+  bin/zookeeper-shell.sh <IP>:2181
+  ```
+
+## Kafka 설정
+- Apache Kafka 폴더 config 내에 zookeper.properties 파일을 3개 복사한다.
+  ```
+  cp server.properties server_1.properties
+  cp server.properties server_2.properties
+  cp server.properties server_3.properties
+  ```
+- Kafka Log 저장하는 폴더를 노드별로 생성한다.<br>
+  ```
+  cd /tmp/kafka-logs
+  mkdir kafka_1
+
+  /tmp/kafka-logs/kafka_1
+  /tmp/kafka-logs/kafka_2
+  /tmp/kafka-logs/kafka_3
+  ```
+- server_1.properties 설정
+  server_2, server_3도 마찬가지로 설정한다.<br>
+  (*) 표시의 경우 노드별로 다르게 설정한다.
+  ```
+  broker.id=0 (*) 브로커 카프카를 구분하기 위한 ID, 카프카마다 다르게 설정해야함 (0, 1, 2)
+  listeners=PLAINTEXT://:9092 (*) 각각 다른 포트 설정 (9092, 9093, 9094)
+  advertised.listeners=PLAINTEXT://<IP>:9092 
+  log.dirs=/tmp/kafka-logs/kafka_1 (*) 각각 로그 경로 설정 (kafka_1, kafka_2, kafka_3)
+  zookeeper.connect=<IP>:2181, <IP>:2182, <IP>:2183 // 각 서버별 zookeeper 설정 포트
+  ```
+
+## Kafka 실행
+  ```
+  bin/kafka-server-start.sh -daemon ./config/server_1.properties
+  bin/kafka-server-start.sh -daemon ./config/server_2.properties
+  bin/kafka-server-start.sh -daemon ./config/server_3.properties
+  ```
   
-ps -ef | grep zookeeper
-```
