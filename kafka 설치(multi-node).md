@@ -151,5 +151,25 @@ zookeeper_2, zookeeper_3도 마찬가지로 설정한다.<br>
   bin/kafka-server-start.sh -daemon ./config/server_1.properties
   bin/kafka-server-start.sh -daemon ./config/server_2.properties
   bin/kafka-server-start.sh -daemon ./config/server_3.properties
-  ```
   
+  jps // kafka 3개가 떠있는 것을 확인할 수 있다.
+  ```
+
+## 로컬컴퓨터에서 카프카 통신 확인
+
+1. 로컬 컴퓨터에 서버와 동일한 버전의 카프카 바이너리 패키지 다운
+    
+    ```
+    java
+    wget https://dlcdn.apache.org/kafka/3.2.0/kafka_2.12-3.2.0.tgz
+    
+    tar xvf kafka_2.12-3.2.0.tgz
+    ```
+    
+2. 카프카 브로커 정보 가져오기
+    
+    ```
+    java
+    bin/kafka-broker-api-versions.sh --bootstrap-server (퍼블릭IP):9092
+    ```
+
