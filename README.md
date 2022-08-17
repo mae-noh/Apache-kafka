@@ -1,2 +1,2 @@
 # Apache-kafka
-kafka, kafka-connector, kafka-stream
+Kafka, Kafka-connector, Kafka-streams
