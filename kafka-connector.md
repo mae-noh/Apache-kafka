@@ -17,16 +17,16 @@
 커넥터를 플러그인으로 추가하기 위해서는 커넥터 자바파일을 압축해야함.
 
 - `build.gradle`에 추가 후, gradle의 `clean` -> `jar`
-```
-jar {
-    from {
-        configurations.runtimeClasspath.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-    }
+  ```
+  jar {
+      from {
+          configurations.runtimeClasspath.collect {
+              it.isDirectory() ? it : zipTree(it)
+          }
+      }
 
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
+      duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+  }
 ```
 - 추출한 jar 파일은 카프카 커넥터가 참조할 수 있는 디렉토리로 옮겨서 사용한다. (프로젝트 build > libs > .jar)
 - 배포된 카프카 커넥트 디렉토리에 plugins 디렉토리 생성하여 jar파일을 옮긴다.
