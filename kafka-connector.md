@@ -88,8 +88,9 @@ bin/connect-distributed.sh config/connect-distributed.properties
   curl -X POST "http:///<호스트(카프카)>:8083/connectors/{connector_name}/restart"
   ```
 
+<br>
 
----
+## 카프카 브로커 Topic 커맨드 라인 툴
 
 - Topic list 확인
   ```
