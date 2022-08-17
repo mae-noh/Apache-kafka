@@ -1,18 +1,22 @@
 # Kafka Streams
-- Streams Developer Guide를 참고하여 정리한 문서입니다.<br>
-https://docs.confluent.io/platform/current/streams/developer-guide/index.html
+>Streams Developer Guide를 참고하여 정리한 문서입니다.<br>
+>https://docs.confluent.io/platform/current/streams/developer-guide/index.html
 
 <br>
 
 ## 목차
 - Kafka Streams API
+- 토폴로지
 - Q&A
 
 <br>
 <br>
 
 # Kafka Streams API
-카프카 스트림즈가 무엇인가요? 아직 잘 모르겠습니다.
+카프카 스트림즈가 무엇인가요?
+
+*Kafka Streams also provides **real-time stream processing** on top of the Kafka Consumer client.
+![image](https://user-images.githubusercontent.com/65100355/185139707-a2f3518a-3f05-4f7c-8ceb-8c8c9ac15d52.png)
 
 <br>
 
