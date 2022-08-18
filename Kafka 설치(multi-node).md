@@ -24,13 +24,6 @@ tar -xvf kafka_2.12-3.2.0.tgz
 ## Zookeeper 설정
 Zookeeper 3개의 노드를 하나의 클러스터로 구성<br>
 
-- Apache Kafka 폴더 config 내에 zookeper.properties 파일을 3개 복사한다.
-  ```
-  cp zookeeper.properties zookeeper_1.properties
-  cp zookeeper.properties zookeeper_2.properties
-  cp zookeeper.properties zookeeper_3.properties
-  ```
-
 - Zookeeper Log 저장하는 폴더를 노드별로 생성한다.<br>
 (zookeeper_1,2,3 각각 저장 폴더 별도 구성)
   ```
@@ -42,6 +35,21 @@ Zookeeper 3개의 노드를 하나의 클러스터로 구성<br>
   ./kafka_2.12-3.2.0/data/zookeeper_1
   ./kafka_2.12-3.2.0/data/zookeeper_2
   ./kafka_2.12-3.2.0/data/zookeeper_3
+  ```
+
+- server myid 설정
+  ```
+  ./kafka_2.12-3.2.0/data
+
+  cd ./kafka_2.12-3.2.0/data/zookeeper_1
+  touch myid
+
+  // 1,2,3번 모두 적용
+  ./kafka_2.12-3.2.0/data/zookeeper_1/myid
+  ./kafka_2.12-3.2.0/data/zookeeper_2/myid
+  ./kafka_2.12-3.2.0/data/zookeeper_3/myid
+
+  // myid 내에 zookeeper.properties에 설정한 (myid) 입력
   ```
 
 - zookeeper_1.properties 설정
@@ -92,20 +100,12 @@ zookeeper_2, zookeeper_3도 마찬가지로 설정한다.<br>
   server.3=<IP>:28883:38883<br>
  
 <br>
-  
-- server myid 설정
+
+- Apache Kafka 폴더 config 내에 zookeper.properties 파일을 3개 복사한다.
   ```
-  ./kafka_2.12-3.2.0/data
-
-  cd ./kafka_2.12-3.2.0/data/zookeeper_1
-  touch myid
-
-  // 1,2,3번 모두 적용
-  ./kafka_2.12-3.2.0/data/zookeeper_1/myid
-  ./kafka_2.12-3.2.0/data/zookeeper_2/myid
-  ./kafka_2.12-3.2.0/data/zookeeper_3/myid
-
-  // myid 내에 zookeeper.properties에 설정한 (myid) 입력
+  cp zookeeper.properties zookeeper_2.properties // cp: 파일복사
+  cp zookeeper.properties zookeeper_3.properties
+  mv zookeeper.properties zookeeper_1.properties // mv: 파일명 변경
   ```
 
 ## Zookeeper 실행  
