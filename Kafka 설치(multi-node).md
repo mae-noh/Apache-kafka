@@ -120,12 +120,6 @@ zookeeper_2, zookeeper_3도 마찬가지로 설정한다.<br>
   ```
 
 ## Kafka 설정
-- Apache Kafka 폴더 config 내에 zookeper.properties 파일을 3개 복사한다.
-  ```
-  cp server.properties server_1.properties
-  cp server.properties server_2.properties
-  cp server.properties server_3.properties
-  ```
 - Kafka Log 저장하는 폴더를 노드별로 생성한다.<br>
   ```
   cd /tmp/kafka-logs
@@ -135,7 +129,7 @@ zookeeper_2, zookeeper_3도 마찬가지로 설정한다.<br>
   /tmp/kafka-logs/kafka_2
   /tmp/kafka-logs/kafka_3
   ```
-- server_1.properties 설정
+- ./config/server_1.properties 설정
   server_2, server_3도 마찬가지로 설정한다.<br>
   (*) 표시의 경우 노드별로 다르게 설정한다.
   ```
@@ -146,6 +140,13 @@ zookeeper_2, zookeeper_3도 마찬가지로 설정한다.<br>
   zookeeper.connect=<IP>:2181, <IP>:2182, <IP>:2183 // 각 서버별 zookeeper 설정 포트
   ```
 
+- Apache Kafka 폴더 config 내에 zookeper.properties 파일을 3개 복사한다.
+  ```
+  cp server.properties server_2.properties
+  cp server.properties server_3.properties
+  mv server.properties server_1.properties
+  ```
+  
 ## Kafka 실행
   ```
   bin/kafka-server-start.sh -daemon ./config/server_1.properties
@@ -176,9 +177,18 @@ zookeeper_2, zookeeper_3도 마찬가지로 설정한다.<br>
 
   
 ## 에러
-  - 경로 에러
+  - java 경로 에러
   ```
   cd /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/bin/java
   bash: cd: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/bin/java: No such file or directory
   ```
     bin/kafka-run-server.sh 에서 which java to use를 존재하는 경로로 변경
+  
+  - Kafka 실행시 디렉토리 권한 에러
+  ```
+  ERROR Disk error while locking directory /tmp/kafka-logs/kafka_1
+  ```
+    로그 경로 또한 카프카 실행 권한과 동일해야함
+  ```
+  sudo chown -R <id>:<id> 디렉토리경로
+  ```
