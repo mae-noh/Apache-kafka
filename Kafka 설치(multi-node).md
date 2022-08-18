@@ -173,3 +173,12 @@ zookeeper_2, zookeeper_3도 마찬가지로 설정한다.<br>
     bin/kafka-broker-api-versions.sh --bootstrap-server (퍼블릭IP):9092
     ```
 
+
+  
+## 에러
+  - 경로 에러
+  ```
+  cd /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/bin/java
+  bash: cd: /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/bin/java: No such file or directory
+  ```
+  bin/kafka-run-server.sh 에서 which java to use를 존재하는 경로로 변경
